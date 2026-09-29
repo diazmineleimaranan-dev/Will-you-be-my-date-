@@ -1,1 +1,76 @@
+<script>
 
+    let noClicks = 0;
+
+    function sayYes() {
+        document.getElementById("result").style.display = "block";
+
+        document.getElementById("yesBtn").style.display = "none";
+        document.getElementById("noBtn").style.display = "none";
+
+        document.querySelector("h1").innerHTML = "YAYYYY! YOU SAID YES! 😭💗";
+        document.querySelector("p").innerHTML =
+            "I knew you'd say yes! 🥰💐";
+    }
+
+    function moveNo() {
+
+        noClicks++;
+
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+
+        // YES gets bigger
+        let yesSize = 17 + (noClicks * 5);
+        let yesPadding = 13 + (noClicks * 3);
+
+        yesBtn.style.fontSize = yesSize + "px";
+        yesBtn.style.padding =
+            yesPadding + "px " + (30 + noClicks * 5) + "px";
+
+        // NO gets smaller
+        let noSize = Math.max(8, 17 - (noClicks * 2));
+
+        noBtn.style.fontSize = noSize + "px";
+        noBtn.style.padding =
+            Math.max(4, 13 - noClicks) + "px " +
+            Math.max(8, 30 - noClicks * 2) + "px";
+
+        // NO starts running away
+        if (noClicks >= 2) {
+
+            noBtn.style.position = "fixed";
+
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+            const randomX = Math.max(10, Math.random() * maxX);
+            const randomY = Math.max(10, Math.random() * maxY);
+
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+        }
+
+        // Change text depending on how many times NO is clicked
+        if (noClicks == 1) {
+            noBtn.innerHTML = "Are you sure? 🥺";
+        }
+
+        if (noClicks == 2) {
+            noBtn.innerHTML = "Really? 😭";
+        }
+
+        if (noClicks == 3) {
+            noBtn.innerHTML = "NOOO 😭";
+        }
+
+        if (noClicks == 4) {
+            noBtn.innerHTML = "Stop 😭";
+        }
+
+        if (noClicks >= 5) {
+            noBtn.innerHTML = "NO 💀";
+        }
+    }
+
+</script>
